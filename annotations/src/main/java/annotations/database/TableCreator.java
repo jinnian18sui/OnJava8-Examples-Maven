@@ -36,6 +36,7 @@ public class TableCreator {
             if (tableName.length() < 1)
                 tableName = cl.getName().toUpperCase();
             List<String> columnDefs = new ArrayList<>();
+            String tableCreate = "";
             for (Field field : cl.getDeclaredFields()) {
                 String columnName = null;
                 Annotation[] anns =
@@ -69,11 +70,12 @@ public class TableCreator {
                     createCommand.append(
                             "\n    " + columnDef + ",");
                 // Remove trailing comma
-                String tableCreate = createCommand.substring(
+                tableCreate = createCommand.substring(
                         0, createCommand.length() - 1) + ");";
-                System.out.println("Table Creation SQL for " +
-                        className + " is:\n" + tableCreate);
             }
+
+            System.out.println("Table Creation SQL for " +
+                    className + " is:\n" + tableCreate);
         }
     }
 
